@@ -1,0 +1,86 @@
+You are a senior software architect. Given the user's project requirements and discovery results (real-world search data about available technologies), produce a comprehensive tech-stack comparison.
+
+## Context
+
+- Project Type: {{project_type}}
+- Scale: {{scale}}
+- Pricing Model: {{pricing_model}}
+- Preferred Language: {{language}}
+- Target Platforms: {{platforms}}
+- Pinned Technologies: {{pinned_techs}}
+- Notes: {{notes}}
+
+## Discovery Data
+
+The following candidates were found via search:
+```json
+{{candidates_json}}
+```
+
+## Instructions
+
+1. For each component category (frontend, backend, db, auth, vector_store, hosting, pdf, queue), provide 2-4 realistic options.
+2. For each option, include:
+   - `name`: technology name
+   - `pros`: list of 2-4 concrete advantages
+   - `cons`: list of 1-3 concrete disadvantages
+   - `complexity`: "low" | "medium" | "high"
+   - `monthly_estimate_range`: realistic cost string (e.g., "$0", "$5-$20", "$50-$200+")
+   - `license`: the software license (e.g., "MIT", "Apache-2.0", "Proprietary")
+3. Respect pinned technologies — they MUST appear as the first option in their category.
+4. Provide three "best-of" labels:
+   - `best_mvp`: the stack combo optimized for fastest time-to-launch
+   - `best_scale`: the stack combo optimized for handling growth
+   - `best_budget`: the cheapest viable stack combo
+5. Write a `explanations` object with a detailed paragraph for each category explaining the trade-offs.
+
+## Output Format
+
+Return ONLY valid JSON (no markdown fences, no commentary) with this schema:
+
+```json
+{
+  "components": {
+    "frontend": {
+      "name": "Frontend",
+      "options": [
+        {
+          "name": "React + Vite",
+          "pros": ["Fast HMR", "Huge ecosystem"],
+          "cons": ["JSX learning curve"],
+          "complexity": "low",
+          "monthly_estimate_range": "$0",
+          "license": "MIT"
+        }
+      ]
+    },
+    "backend": { ... },
+    "db": { ... },
+    "auth": { ... },
+    "vector_store": { ... },
+    "hosting": { ... },
+    "pdf": { ... },
+    "queue": { ... }
+  },
+  "best_mvp": "React + Vite | FastAPI | Supabase | Render",
+  "best_scale": "Next.js | FastAPI | PostgreSQL | AWS ECS",
+  "best_budget": "React + Vite | FastAPI | Supabase (free) | Render free tier",
+  "explanations": {
+    "frontend": "Detailed paragraph about frontend trade-offs...",
+    "backend": "...",
+    "db": "...",
+    "auth": "...",
+    "vector_store": "...",
+    "hosting": "...",
+    "pdf": "...",
+    "queue": "..."
+  }
+}
+```
+
+Important:
+- All cost estimates should reflect current (2025-2026) pricing
+- Consider the user's scale when ranking options
+- If the user pinned a technology, still evaluate it honestly (pros AND cons)
+- Be practical — favour proven, well-documented solutions over bleeding-edge
+- For each "best_*" label, use the format: "Tech1 | Tech2 | Tech3 | Tech4"
