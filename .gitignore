@@ -8,33 +8,55 @@ __pycache__/
 dist/
 build/
 *.whl
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
 
 # Virtual environments
 .venv/
 venv/
-tecvenv/
-backend/.venv/
 env/
+backend/.venv/
+tecvenv/
+
+# ── Node / Frontend ───────────────────────────────────────────────────────────
+node_modules/
+**/node_modules/
+dist/
+**/dist/
+.next/
+**/.next/
+out/
+**/out/
+.vercel/
+**/.vercel/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
 
 # ── Environment / Secrets ─────────────────────────────────────────────────────
 .env
 .env.*
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 !.env.example
 
 # ── ChromaDB local persistence ────────────────────────────────────────────────
 chroma_db/
 backend/chroma_db/
+**/chroma_db/
 
 # ── Storage (generated PDFs, uploads) ─────────────────────────────────────────
 storage/
 backend/storage/
+**/storage/
 *.pdf
-
-# ── Node / Frontend ───────────────────────────────────────────────────────────
-node_modules/
-frontend/node_modules/
-frontend/dist/
-frontend/.vite/
+*.docx
 
 # ── IDE / Editor ──────────────────────────────────────────────────────────────
 .vscode/
@@ -50,31 +72,8 @@ desktop.ini
 *.tmp
 *.bak
 *.log
-
-# ── Testing / Coverage ────────────────────────────────────────────────────────
-.pytest_cache/
-.coverage
-htmlcov/
-.tox/
-.nox/
-
-# ── Docker (local volumes, not needed in repo) ───────────────────────────────
-docker-compose.override.yml
-
-# ── Misc ──────────────────────────────────────────────────────────────────────
 *.sqlite3
 sample_data/
-*.swp
-*.swo
 
-# OS
-.DS_Store
-Thumbs.db
-
-# Docker
-docker-compose.override.yml
-
-# Pytest
-.pytest_cache/
-htmlcov/
-.coverage
+PreClaw_Launch_Strategy.md
+PreClaw_Overview.txt

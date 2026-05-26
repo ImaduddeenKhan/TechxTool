@@ -88,7 +88,7 @@ embedding = response.data[0].embedding
 
 - [ ] Add GitHub Actions workflow: lint (ruff) + test (pytest) + build (frontend)
 - [ ] Add pre-commit hooks (ruff, prettier)
-- [ ] Auto-deploy to Render on `main` push
+- [ ] Auto-deploy to Vercel on `main` push
 - [ ] Add E2E test with Playwright (frontend)
 
 ## 📊 Observability

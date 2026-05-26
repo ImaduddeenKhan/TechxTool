@@ -71,28 +71,37 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-# CORS — allow local Vite dev server
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=[
+# CORS — allow origins from environment or local Vite dev server
+import os
+cors_origins_env = os.environ.get("CORS_ORIGINS")
+if cors_origins_env:
+    allow_origins = [origin.strip() for origin in cors_origins_env.split(",") if origin.strip()]
+else:
+    allow_origins = [
         "http://localhost:5173",
         "http://localhost:3000",
         "http://127.0.0.1:5173",
-    ],
-    allow_credentials=True,
+    ]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=allow_origins,
+    allow_credentials=False if "*" in allow_origins else True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
 # ── Routers ───────────────────────────────────────────────────────────────────
 
-from app.routers import discover, export, generate, parse, project  # noqa: E402
+from app.routers import discover, export, generate, parse, project, diagrams, prompts  # noqa: E402
 
 app.include_router(parse.router, prefix="/api", tags=["parse"])
 app.include_router(discover.router, prefix="/api", tags=["discover"])
 app.include_router(generate.router, prefix="/api", tags=["generate"])
 app.include_router(project.router, prefix="/api", tags=["project"])
 app.include_router(export.router, prefix="/api", tags=["export"])
+app.include_router(diagrams.router, prefix="/api", tags=["diagrams"])
+app.include_router(prompts.router, prefix="/api", tags=["prompts"])
 
 
 # ── Health check ──────────────────────────────────────────────────────────────
