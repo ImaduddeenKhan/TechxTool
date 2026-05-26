@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage.jsx";
 import { useState, useEffect } from "react";
+import { SITE_NAME, SUPPORT_EMAIL } from "./lib/constants.js";
 
 export default function App() {
   const [darkMode, setDarkMode] = useState(() => {
@@ -89,7 +90,7 @@ export default function App() {
                   letterSpacing: "-0.02em",
                 }}
               >
-                StackAI
+                {SITE_NAME}
               </span>
               <span
                 style={{
@@ -188,12 +189,20 @@ export default function App() {
               </svg>
             </div>
             <span style={{ color: "var(--theme-text-on-dark-muted)", fontSize: "0.8rem" }}>
-              StackAI — AI-powered tech stack recommendations
+              {SITE_NAME} — AI-powered tech stack and prompt generation
             </span>
           </div>
-          <span style={{ color: "var(--theme-text-on-dark-muted)", fontSize: "0.75rem" }}>
-            Built with FastAPI + React + Exa AI
-          </span>
+          <div className="flex items-center gap-4">
+            <a
+              href={`mailto:${SUPPORT_EMAIL}`}
+              style={{ color: "var(--theme-text-on-dark-muted)", fontSize: "0.75rem", textDecoration: "none" }}
+            >
+              Support
+            </a>
+            <span style={{ color: "var(--theme-text-on-dark-muted)", fontSize: "0.75rem" }}>
+              Built with FastAPI + React + Gemini
+            </span>
+          </div>
         </div>
       </footer>
     </div>

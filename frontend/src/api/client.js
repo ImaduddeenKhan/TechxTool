@@ -5,9 +5,9 @@ import axios from "axios";
  * In dev mode, Vite proxies /api → http://localhost:8000.
  */
 const api = axios.create({
-  baseURL: "/",
+  baseURL: import.meta.env.VITE_API_URL || "/",
   headers: { "Content-Type": "application/json" },
-  timeout: 60_000, // 60 s for long discovery calls
+  timeout: 120_000, // 120 s for full pipeline
 });
 
 // ── Response interceptor — surface error messages ────────────────────────────
